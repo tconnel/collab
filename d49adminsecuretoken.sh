@@ -1,12 +1,11 @@
 #!/bin/bash
 
 #Prompts the user for administrator password
-adminPassword=$(
-    osascript <<END
-set userInput to the text returned of (display dialog "Please input your Macbook Password:" default answer "" with hidden answer)
-return userInput
-END
-)
+#NOTE bash native 'read' will probably do what you were accomplishing with
+#     osascript and will be more portable across varios OS flavors (works with
+#     any 'bash' implementation consistently).
+read -s -p "Please input your Macbook Password:" adminPassword
+
 result=$(
     echo "$adminPassword" | sudo -S ls /var/root 2>&1 >/dev/null
     echo "$?"
