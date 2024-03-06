@@ -1,18 +1,19 @@
 #!/bin/bash
 
 #Prompts the user for administrator password
-adminPassword=$(
-    while :;
-        osascript <<END
-            set userInput to the text returned of (display dialog "Please input your Macbook Password:" default answer "" with hidden answer)
-        END
-    done
-)
-
-result=$(
-    echo "$adminPassword" | sudo -S ls /var/root 2>&1 >/dev/null
-    echo "$?"
-)
+while true;
+    adminPassword=$(osascript <<END
+        return text returned of (display dialog "Please input your Macbook Password:" default answer "" with hidden answer)
+    END
+    )
+    result=$(
+        echo "$adminPassword" | sudo -S ls /var/root 2>&1 >/dev/null
+        echo "$?"
+    )
+    if [[ $result = 0 ]]; then
+        break
+    fi
+done
 
 if [[ "$result" != "Password:0" ]]; then
     osascript -e 'display dialog "Password Incorrect"'
