@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly integer=1
+readonly intxceger=1
 
 #Prompts the user for administrator password
 while :; do
