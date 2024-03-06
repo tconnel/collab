@@ -1,5 +1,5 @@
 #!/usr/bin/bash -e
-readonly prompt='Please input your Macbook Password:'
+readonly prompt='Please input your Password:'
 case "$(uname -s)" in
     Linux*)
         ;;
