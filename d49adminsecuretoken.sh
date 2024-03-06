@@ -2,11 +2,13 @@
 
 #Prompts the user for administrator password
 adminPassword=$(
-    osascript <<END
-set userInput to the text returned of (display dialog "Please input your Macbook Password:" default answer "" with hidden answer)
-return userInput
-END
+    while :;
+        osascript <<END
+            set userInput to the text returned of (display dialog "Please input your Macbook Password:" default answer "" with hidden answer)
+        END
+    done
 )
+
 result=$(
     echo "$adminPassword" | sudo -S ls /var/root 2>&1 >/dev/null
     echo "$?"
